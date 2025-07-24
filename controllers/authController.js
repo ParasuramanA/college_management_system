@@ -7,11 +7,11 @@ const generateToken = (user) => {
 };
 
 exports.register = async (req, res) => {
-  const { name, email, password, role } = req.body;
+  const { firstname,lastname, email, password, role } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
   
   try {
-    const user = await users.create({ name, email, password: hashedPassword, role });
+    const user = await users.create({ firstname,lastname, email, password: hashedPassword, role });
     res.status(201).json({ token: generateToken(user) });
   } catch (err) {
     res.status(400).json({ message: 'Registration failed', error: err.message });
